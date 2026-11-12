@@ -1,0 +1,2 @@
+class RouteError(RuntimeError):
+    pass
