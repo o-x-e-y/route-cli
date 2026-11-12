@@ -5,6 +5,10 @@ nothing else, so the walk before the first vehicle is counted back from its
 departure and the walk after the last one forward from its arrival. Walks are
 rounded up to whole minutes, which keeps every time on the minute and errs on
 the side of leaving early.
+
+Walking costs the user nothing, but waiting does, and a tight transfer is a
+risk: one minute of delay can mean the next connection is gone. So options
+are compared on time, transfers and tight transfers, never on walking.
 """
 
 import datetime as dt
@@ -19,6 +23,8 @@ MODES = {
     "BUS": "bus", "INTERCITY_BUS": "bus", "TROLLEYBUS": "bus",
     "TRAM": "tram", "SUBWAY": "metro", "METRO_RAIL": "metro", "FERRY": "ferry",
 }
+
+TIGHT_TRANSFER_MIN = 5
 
 
 def resolved(response: dict, side: str, query: str, location: dict | None) -> dict:
@@ -48,14 +54,15 @@ def options(response: dict, origin: str, destination: str, moment: dt.datetime, 
 
 
 def _cost(option):
-    walk = sum(leg["duration_min"] for leg in option["legs"] if leg["mode"] == "walk")
+    tight = sum(1 for leg in option["legs"] if leg.get("wait_min", TIGHT_TRANSFER_MIN)
+                < TIGHT_TRANSFER_MIN)
     return (-dt.datetime.fromisoformat(option["depart"]).timestamp(),
-            dt.datetime.fromisoformat(option["arrive"]).timestamp(), option["transfers"], walk)
+            dt.datetime.fromisoformat(option["arrive"]).timestamp(), option["transfers"], tight)
 
 
 def _beats(a, b):
     """`a` leaves no earlier, arrives no later, and has no more transfers or
-    walking than `b`, and is better on at least one of those."""
+    tight transfers than `b`, and is better on at least one of those."""
     ca, cb = _cost(a), _cost(b)
     return ca != cb and all(x <= y for x, y in zip(ca, cb, strict=True))
 
@@ -79,15 +86,23 @@ def _option(route, origin, destination, moment, arrive):
             leg["from"] = legs[i - 1]["to"] if i else origin
             leg["to"] = legs[i + 1]["from"] if i + 1 < len(legs) else destination
             leg["depart"], leg["arrive"] = cursor, cursor + leg.pop("duration")
+        elif leg is not rides[0]:
+            # Walks are rounded up, so one can end a little after the ride leaves.
+            leg["wait"] = max(leg["depart"] - cursor, dt.timedelta())
         cursor = leg["arrive"]
     depart, end = (legs[0]["depart"], legs[-1]["arrive"]) if legs else (cursor, cursor)
-    return {
+    waits = [_span(dt.timedelta(), leg["wait"]) for leg in legs if "wait" in leg]
+    option = {
         "depart": _iso(depart),
         "arrive": _iso(end),
         "duration_min": _span(depart, end),
         "transfers": max(len(rides) - 1, 0),
-        "legs": [_finish(leg) for leg in legs],
+        "wait_min": sum(waits),
     }
+    if waits:
+        option["tightest_transfer_min"] = min(waits)
+    option["legs"] = [_finish(leg) for leg in legs]
+    return option
 
 
 def _group(steps):
@@ -125,9 +140,11 @@ def _ride(transit):
 
 
 def _finish(leg):
-    out = {k: v for k, v in leg.items() if k not in ("depart", "arrive")}
+    out = {k: v for k, v in leg.items() if k not in ("depart", "arrive", "wait")}
     out["depart"], out["arrive"] = _iso(leg["depart"]), _iso(leg["arrive"])
     out["duration_min"] = _span(leg["depart"], leg["arrive"])
+    if "wait" in leg:
+        out["wait_min"] = _span(dt.timedelta(), leg["wait"])
     return out
 
 
@@ -139,7 +156,7 @@ def _minutes(seconds: int) -> int:
     return math.ceil(seconds / 60)
 
 
-def _span(start: dt.datetime, end: dt.datetime) -> int:
+def _span(start, end) -> int:
     return round((end - start).total_seconds() / 60)
 
 

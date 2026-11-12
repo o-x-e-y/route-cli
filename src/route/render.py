@@ -2,6 +2,7 @@ import datetime as dt
 import json
 
 from .places import latlng
+from .trips import TIGHT_TRANSFER_MIN
 
 GENERIC_TYPES = {"establishment", "point_of_interest", "political", "geocode"}
 
@@ -21,9 +22,10 @@ def as_text(result: dict) -> str:
     ]
     for n, option in enumerate(result["options"], 1):
         transfers = option["transfers"]
+        waiting = f", {option['wait_min']} min waiting" if transfers else ""
         lines += ["", f"{n}. {_time(option['depart'], asked)} → {_time(option['arrive'], asked)}  "
                       f"{option['duration_min']} min, {transfers} "
-                      f"transfer{'' if transfers == 1 else 's'}"]
+                      f"transfer{'' if transfers == 1 else 's'}{waiting}"]
         lines += [f"   {_leg(leg, asked)}" for leg in option["legs"]]
     lines += ["", f"maps: {result['maps_url']}"]
     return "\n".join(lines)
@@ -46,7 +48,11 @@ def _leg(leg: dict, asked: dt.datetime) -> str:
         return f"{span}  walk {leg['duration_min']} min to {leg['to']}"
     line = " ".join(filter(None, [leg["mode"], leg.get("line")]))
     headsign = f" (to {leg['headsign']})" if leg.get("headsign") else ""
-    return f"{span}  {line}{headsign}: {leg['from']} → {leg['to']}"
+    wait = ""
+    if "wait_min" in leg:
+        tight = ", tight" if leg["wait_min"] < TIGHT_TRANSFER_MIN else ""
+        wait = f"  [{leg['wait_min']} min wait{tight}]"
+    return f"{span}  {line}{headsign}: {leg['from']} → {leg['to']}{wait}"
 
 
 def _time(stamp: str, asked: dt.datetime) -> str:

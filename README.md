@@ -47,6 +47,8 @@ matters rather than scanning many times.
       "arrive": "2026-11-14T16:54:00+01:00",
       "duration_min": 73,
       "transfers": 1,
+      "wait_min": 9,
+      "tightest_transfer_min": 9,
       "legs": [
         {"mode": "walk", "from": "Pathé Eindhoven", "to": "Eindhoven Centraal",
          "depart": "2026-11-14T15:41:00+01:00", "arrive": "2026-11-14T15:51:00+01:00", "duration_min": 10},
@@ -55,7 +57,8 @@ matters rather than scanning many times.
          "depart": "2026-11-14T15:51:00+01:00", "arrive": "2026-11-14T16:20:00+01:00", "duration_min": 29},
         {"mode": "walk", "from": "Tilburg", "to": "Tilburg, Centraal Station", "...": "..."},
         {"mode": "bus", "line": "1", "headsign": "ETZ Elisabeth", "operator": "Bravo (Arriva)",
-         "from": "Tilburg, Centraal Station", "to": "Tilburg, Stappegoor/IJsbaan", "...": "..."},
+         "from": "Tilburg, Centraal Station", "to": "Tilburg, Stappegoor/IJsbaan", "...": "...",
+         "wait_min": 9},
         {"mode": "walk", "from": "Tilburg, Stappegoor/IJsbaan", "to": "Pathé Tilburg Stappegoor", "...": "..."}
       ]
     }
@@ -68,13 +71,15 @@ matters rather than scanning many times.
   the legs. A `locality` when you meant a building means it matched the
   town. "Eindhoven Centraal" matches a `bar` near the station, while
   "Station Eindhoven Centraal" gives the `train_station`. When `types` is
-  not what you meant, ask again with a more specific name or `lat,lng`. `lat` / `lng` may be snapped to the nearest road. `place_id` and
-  `types` are missing for `lat,lng` input.
+  not what you meant, ask again with a more specific name or `lat,lng`.
+  `lat` / `lng` may be snapped to the nearest road. `place_id` and `types`
+  are missing for `lat,lng` input.
 - `depart` or `arrive` at the top level is the time you asked for.
-- `options` are sorted by departure. Options that are worse on every count
-  than another (leave no later, arrive no earlier, no fewer transfers, no
-  less walking) are left out. What remains are real trade-offs, so pick
-  by what matters for the trip.
+- `options` are sorted by departure. An option is left out when another one
+  leaves no earlier, arrives no later, and has no more transfers and no
+  more tight transfers (under 5 minutes). Walking doesn't count: leaving
+  later and walking to a stop beats waiting at one. What remains are real
+  trade-offs, so pick by what matters for the trip.
 - Option `depart` is when to leave the starting point, walk included.
   `arrive` is when you reach the destination, walk included.
 - `mode` is `walk`, `train`, `bus`, `tram`, `metro`, `ferry`, or Google's
@@ -82,8 +87,11 @@ matters rather than scanning many times.
   trains (`Intercity`, `Sprinter`) and the line number for buses and trams.
   `headsign` is the direction shown on the vehicle. `operator` can be
   foreign: `De Lijn` is a Belgian bus.
-- Waiting time is the gap between one leg's `arrive` and the next leg's
-  `depart`.
+- `wait_min` on a ride is the time spent waiting for it after the previous
+  ride and any walk in between. On the option it's the total.
+  `tightest_transfer_min` is the shortest of those waits, and is missing
+  when there is no transfer. Under 5 minutes, one minute of delay can cost
+  the connection.
 - All times are ISO 8601 with the Amsterdam offset, on whole minutes. Walks
   are rounded up, so an option can leave a minute before the `--depart`
   time.

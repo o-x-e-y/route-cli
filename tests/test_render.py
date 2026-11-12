@@ -24,12 +24,12 @@ def test_text_summary(capsys):
         "to:   Pathé Tilburg Stappegoor (51.539557,5.075946; movie_theater)",
         "depart after Sat 2026-11-14 15:35",
         "",
-        "1. 15:41 → 16:54  73 min, 1 transfer",
+        "1. 15:41 → 16:54  73 min, 1 transfer, 9 min waiting",
         "   15:41-15:51  walk 10 min to Eindhoven Centraal",
         "   15:51-16:20  train Sprinter (to Tilburg Universiteit): Eindhoven Centraal → Tilburg",
         "   16:20-16:25  walk 5 min to Tilburg, Centraal Station",
         "   16:34-16:49  bus 1 (to ETZ Elisabeth): Tilburg, Centraal Station → "
-        "Tilburg, Stappegoor/IJsbaan",
+        "Tilburg, Stappegoor/IJsbaan  [9 min wait]",
         "   16:49-16:54  walk 5 min to Pathé Tilburg Stappegoor",
     ]
     assert out.rstrip().splitlines()[-1].startswith("maps: https://www.google.com/maps/dir/?api=1")
@@ -41,6 +41,15 @@ def test_typed_coordinates_are_not_repeated(capsys):
                 "--depart", "2026-11-14 10:00"])
     assert out.splitlines()[0] == "from: 51.4794,5.6570"
     assert "0 transfers" in out
+
+
+def test_tight_transfer_is_marked(capsys):
+    out = text(capsys, "stappegoor-helmond-arrive",
+               ["--from", "Pathé Tilburg Stappegoor", "--to", "Helmond",
+                "--arrive", "2026-11-14 23:30"])
+    assert "2. 22:15 → 23:28  73 min, 2 transfers, 12 min waiting" in out
+    assert ("   23:19-23:28  train Intercity (to Venlo): Eindhoven Centraal → Helmond  "
+            "[2 min wait, tight]") in out
 
 
 def test_next_day_is_marked(capsys):

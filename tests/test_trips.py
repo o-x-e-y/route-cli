@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from route import cli
+from route import cli, trips
 from route.times import TZ
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -56,6 +56,8 @@ def test_depart_options(capsys):
         "arrive": "2026-11-14T16:54:00+01:00",
         "duration_min": 73,
         "transfers": 1,
+        "wait_min": 9,
+        "tightest_transfer_min": 9,
         "legs": [
             {"mode": "walk", "from": "Pathé Eindhoven", "to": "Eindhoven Centraal",
              "depart": "2026-11-14T15:41:00+01:00", "arrive": "2026-11-14T15:51:00+01:00",
@@ -70,7 +72,7 @@ def test_depart_options(capsys):
             {"mode": "bus", "line": "1", "headsign": "ETZ Elisabeth", "operator": "Bravo (Arriva)",
              "from": "Tilburg, Centraal Station", "to": "Tilburg, Stappegoor/IJsbaan",
              "depart": "2026-11-14T16:34:00+01:00", "arrive": "2026-11-14T16:49:00+01:00",
-             "duration_min": 15},
+             "duration_min": 15, "wait_min": 9},
             {"mode": "walk", "from": "Tilburg, Stappegoor/IJsbaan",
              "to": "Pathé Tilburg Stappegoor",
              "depart": "2026-11-14T16:49:00+01:00", "arrive": "2026-11-14T16:54:00+01:00",
@@ -87,13 +89,46 @@ def test_dominated_options_are_dropped(capsys):
         ("15:41", "16:54"), ("16:04", "17:09")]
 
 
-def test_trade_offs_are_kept(capsys):
+def test_walking_beats_waiting(capsys):
+    """22:10 takes bus 1 from the door and waits 21 min in Tilburg; 22:15
+    walks 15 min to bus 137 and arrives at the same time. Walking isn't a
+    cost, so leaving later wins."""
     _, result, _, _ = run(capsys, "stappegoor-helmond-arrive", ARRIVE)
     times = [(o["depart"][11:16], o["arrive"][11:16]) for o in result["options"]]
-    assert times == [("21:40", "22:58"), ("22:10", "23:28"), ("22:15", "23:28")]
-    walks = [sum(leg["duration_min"] for leg in o["legs"] if leg["mode"] == "walk")
-             for o in result["options"][1:]]
-    assert walks[0] < walks[1]
+    assert times == [("21:40", "22:58"), ("22:15", "23:28")]
+
+
+def test_waits_and_tight_transfers(capsys):
+    _, result, _, _ = run(capsys, "stappegoor-helmond-arrive", ARRIVE)
+    option = result["options"][1]
+    assert [leg.get("wait_min") for leg in option["legs"]] == [None, None, None, 10, 2]
+    assert (option["wait_min"], option["tightest_transfer_min"]) == (12, 2)
+
+
+def test_no_transfer_no_tightest(capsys):
+    _, result, _, _ = run(capsys, "latlng-walk-only",
+                          ["--from", "51.4794,5.6570", "--to", "Pathé Helmond",
+                           "--depart", "2026-11-14 10:00"])
+    assert result["options"][0]["wait_min"] == 0
+    assert "tightest_transfer_min" not in result["options"][0]
+
+
+def option(depart, arrive, transfers, *waits):
+    legs = [{"mode": "train"}] + [{"mode": "train", "wait_min": w} for w in waits]
+    return {"depart": f"2026-11-14T{depart}:00+01:00", "arrive": f"2026-11-14T{arrive}:00+01:00",
+            "transfers": transfers, "legs": legs}
+
+
+def test_a_tight_transfer_counts_against_an_option():
+    safe, tight = option("16:00", "17:00", 1, 8), option("16:00", "17:00", 1, 2)
+    assert trips._beats(safe, tight)
+    assert not trips._beats(tight, safe)
+
+
+def test_a_faster_tight_option_is_kept():
+    safe, tight = option("16:00", "17:10", 1, 8), option("16:00", "17:00", 1, 2)
+    assert not trips._beats(safe, tight)
+    assert not trips._beats(tight, safe)
 
 
 def test_arrive_options_arrive_in_time(capsys):
@@ -103,8 +138,10 @@ def test_arrive_options_arrive_in_time(capsys):
 
 def test_utc_stamps_become_local_time(capsys):
     _, result, _, _ = run(capsys, "stappegoor-helmond-arrive", ARRIVE)
-    bus = result["options"][1]["legs"][1]
-    assert (bus["line"], bus["depart"]) == ("1", "2026-11-14T22:14:00+01:00")
+    bus = result["options"][0]["legs"][1]
+    raw = (FIXTURES / "stappegoor-helmond-arrive.json").read_text()
+    assert '"departureTime": "2026-11-14T20:44:00Z"' in raw
+    assert (bus["line"], bus["depart"]) == ("1", "2026-11-14T21:44:00+01:00")
 
 
 def test_same_station_transfer_has_no_walk(capsys):
