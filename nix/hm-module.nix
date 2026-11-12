@@ -32,12 +32,9 @@ in
 
     package = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.route-cli;
-      defaultText = lib.literalExpression "pkgs.route-cli";
-      description = ''
-        The package to install. The default needs this flake's
-        `overlays.default` in `nixpkgs.overlays`.
-      '';
+      default = pkgs.callPackage ./package.nix { };
+      defaultText = lib.literalMD "this flake's package, built with your `pkgs`";
+      description = "The package to install.";
     };
 
     keyFile = lib.mkOption {
