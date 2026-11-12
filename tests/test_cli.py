@@ -36,9 +36,10 @@ def test_empty_key_file(monkeypatch, tmp_path):
         config.google_key()
 
 
-def test_default_key_path(monkeypatch):
+def test_no_key_path_set(monkeypatch):
     monkeypatch.delenv("ROUTE_GOOGLE_KEY_FILE")
-    assert str(config.google_key_file()) == "/run/secrets/routes-api-key"
+    with pytest.raises(RouteError, match=r"set \$ROUTE_GOOGLE_KEY_FILE"):
+        config.google_key()
 
 
 def test_missing_key_names_the_file(capsys, tmp_path):

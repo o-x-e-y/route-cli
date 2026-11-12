@@ -3,7 +3,7 @@ import datetime as dt
 import sys
 from collections.abc import Callable
 
-from . import config, google, maps, render, times, trips
+from . import config, google, maps, render, times, trips, usage
 from .errors import RouteError
 
 EPILOG = f"""\
@@ -20,8 +20,10 @@ examples:
 One Google Routes request per call, billed: don't loop over many times when
 one --depart or --arrive answers the question.
 
-key: the Google Maps Platform key is read from {config.DEFAULT_GOOGLE_KEY_FILE},
-or from the file $ROUTE_GOOGLE_KEY_FILE names.
+setup: $ROUTE_GOOGLE_KEY_FILE names the file holding the Google Maps Platform key
+(Routes API). At most $ROUTE_MAX_REQUESTS requests (default {config.DEFAULT_MAX_REQUESTS}) are sent
+per $ROUTE_LIMIT_DAYS days (default {config.DEFAULT_LIMIT_DAYS}); the times of past requests are
+kept in $XDG_STATE_HOME/route/requests.json.
 """
 
 Fetch = Callable[[dict], dict]
@@ -72,7 +74,11 @@ def _typed(text: str) -> dict | None:
 
 
 def _google(body: dict) -> dict:
-    return google.compute_routes(config.google_key(), body)
+    key = config.google_key()
+    max_requests, days = config.limit()
+    usage.spend(config.state_dir() / "requests.json", max_requests, days,
+                dt.datetime.now(dt.UTC))
+    return google.compute_routes(key, body)
 
 
 def main(argv=None, fetch: Fetch = _google, now: dt.datetime | None = None) -> int:

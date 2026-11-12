@@ -64,9 +64,11 @@ matters rather than scanning many times.
 ```
 
 - `from` / `to` show what the free text resolved to. There is no resolved
-  name, so check `types` (a `locality` when you meant a building means it
-  matched the town), the coordinates, and the first and last stop in the
-  legs. `lat` / `lng` may be snapped to the nearest road. `place_id` and
+  name, so check `types`, the coordinates, and the first and last stop in
+  the legs. A `locality` when you meant a building means it matched the
+  town. "Eindhoven Centraal" matches a `bar` near the station, while
+  "Station Eindhoven Centraal" gives the `train_station`. When `types` is
+  not what you meant, ask again with a more specific name or `lat,lng`. `lat` / `lng` may be snapped to the nearest road. `place_id` and
   `types` are missing for `lat,lng` input.
 - `depart` or `arrive` at the top level is the time you asked for.
 - `options` are sorted by departure. Options that are worse on every count
@@ -83,7 +85,8 @@ matters rather than scanning many times.
 - Waiting time is the gap between one leg's `arrive` and the next leg's
   `depart`.
 - All times are ISO 8601 with the Amsterdam offset, on whole minutes. Walks
-  are rounded up.
+  are rounded up, so an option can leave a minute before the `--depart`
+  time.
 - `maps_url` opens the route in Google Maps (phone or desktop). It's the
   same link for every option, and Maps opens it on "leave now", so the time
   has to be set in Maps. It's useful in a calendar event description.
@@ -96,11 +99,30 @@ Errors go to stderr as `route: ...`, with exit code 1. Bad flags exit with 2.
   or pass `lat,lng`.
 - `Google found no public transport route ...`: nothing runs then, e.g. at
   night.
-- `Google quota reached`: stop. Don't retry.
+- `Google quota reached` or `local limit reached`: stop. Don't retry, and
+  tell the user. The local message says when the next request is allowed.
 
 ## Setup
 
-The Google Maps Platform key (Routes API) is read from
-`/run/secrets/routes-api-key`, or from the file `$ROUTE_GOOGLE_KEY_FILE`
-names. Packaged as a Nix flake: `packages.default`, `overlays.default`
-(`pkgs.route-cli`).
+| variable | |
+|---|---|
+| `ROUTE_GOOGLE_KEY_FILE` | file holding the Google Maps Platform key (Routes API). Required |
+| `ROUTE_MAX_REQUESTS` | at most this many Google requests (default 600) ... |
+| `ROUTE_LIMIT_DAYS` | ... per this many days (default 7) |
+
+The limit is enforced locally because the Cloud project can't set a daily
+quota. Only the times of past requests are kept, in
+`$XDG_STATE_HOME/route/requests.json` (default `~/.local/state/route/`),
+never their results.
+
+Packaged as a Nix flake: `packages.default`, `overlays.default`
+(`pkgs.route-cli`) and `homeManagerModules.default`, which wraps the binary
+with those variables:
+
+```nix
+programs.route = {
+  enable = true;
+  keyFile = "/run/secrets/routes-api-key";
+  limit = { requests = 600; days = 7; };
+};
+```

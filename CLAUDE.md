@@ -7,7 +7,8 @@ sources (Transitous, NS).
 
 ## Using it
 
-Run `route --help`. Prefer `--json`. Every call is one billed Google request:
+Run `route --help`. Prefer `--json`. Every call is one billed Google request,
+capped locally (600 per 7 days by default):
 don't scan times in a loop, and don't use the live API to test.
 
 ## Layout
@@ -21,6 +22,8 @@ don't scan times in a loop, and don't use the live API to test.
 | `trips.py` | response → options: times, legs, dropping dominated options |
 | `render.py` | text and JSON output |
 | `maps.py` | Google Maps directions links |
+| `usage.py` | the local request limit (times only, never results) |
+| `config.py` | environment: key file, limit, state directory |
 
 ## Things the API does that are easy to get wrong
 

@@ -38,5 +38,7 @@
       overlays.default = final: _prev: {
         route-cli = final.callPackage ./nix/package.nix { };
       };
+
+      homeManagerModules.default = ./nix/hm-module.nix;
     };
 }
