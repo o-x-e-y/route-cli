@@ -222,7 +222,7 @@ don't need rediscovering:
 
 | Secret | Location | Header |
 |---|---|---|
-| Google Maps Platform key | not set up yet, likely `/run/secrets/google-maps-api-key` | `X-Goog-Api-Key` |
+| Google Maps Platform key (Routes API only) | `/run/secrets/routes-api-key` | `X-Goog-Api-Key` |
 | NS key (only if NS is added) | `/run/secrets/ns-api-key` | `Ocp-Apim-Subscription-Key` |
 
 Read keys from files at runtime and make the path configurable (env var).

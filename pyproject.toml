@@ -6,6 +6,7 @@ build-backend = "hatchling.build"
 name = "route-cli"
 version = "0.1.0"
 description = "Public transport routes in the Netherlands, door to door, for agents"
+readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
 dependencies = []
