@@ -55,8 +55,10 @@ def test_depart_options(capsys):
         "depart": "2026-11-14T15:41:00+01:00",
         "arrive": "2026-11-14T16:54:00+01:00",
         "duration_min": 73,
-        "transfers": 1,
+        "ride_min": 44,
         "wait_min": 9,
+        "walk_min": 20,
+        "transfers": 1,
         "tightest_transfer_min": 9,
         "legs": [
             {"mode": "walk", "from": "Pathé Eindhoven", "to": "Eindhoven Centraal",
@@ -160,6 +162,35 @@ def test_durations_add_up(capsys):
             assert option["duration_min"] == (end - start).total_seconds() / 60
             assert option["legs"][0]["depart"] == option["depart"]
             assert option["legs"][-1]["arrive"] == option["arrive"]
+
+
+def test_ride_wait_and_walk_add_up(capsys):
+    for fixture, argv in (("eindhoven-stappegoor-depart", DEPART),
+                          ("stappegoor-helmond-arrive", ARRIVE)):
+        _, result, _, _ = run(capsys, fixture, argv)
+        for option in result["options"]:
+            assert (option["ride_min"] + option["wait_min"] + option["walk_min"]
+                    == option["duration_min"])
+
+
+def test_a_rounded_up_walk_stops_at_the_next_departure():
+    def ride(depart, arrive):
+        stop = {"name": "X", "location": {"latLng": {"latitude": 0, "longitude": 0}}}
+        return {"travelMode": "TRANSIT", "transitDetails": {
+            "stopDetails": {"departureStop": stop, "arrivalStop": stop,
+                            "departureTime": depart, "arrivalTime": arrive},
+            "transitLine": {"nameShort": "1", "vehicle": {"type": "BUS"}}}}
+
+    response = {"routes": [{"legs": [{"steps": [
+        ride("2026-11-14T10:00:00Z", "2026-11-14T10:10:00Z"),
+        {"travelMode": "WALK", "staticDuration": "61s"},
+        ride("2026-11-14T10:11:00Z", "2026-11-14T10:20:00Z"),
+    ]}]}]}
+    [option] = trips.options(response, "a", "b", NOW, arrive=False)
+    walk = option["legs"][1]
+    assert (walk["arrive"], walk["duration_min"]) == ("2026-11-14T11:11:00+01:00", 1)
+    assert option["legs"][2]["wait_min"] == 0
+    assert (option["ride_min"], option["wait_min"], option["walk_min"]) == (19, 0, 1)
 
 
 def test_resolved_places(capsys):

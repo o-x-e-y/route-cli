@@ -83,21 +83,31 @@ def _option(route, origin, destination, moment, arrive):
         cursor = moment - total if arrive else moment
     for i, leg in enumerate(legs):
         if leg["mode"] == "walk":
+            following = legs[i + 1] if i + 1 < len(legs) else None
             leg["from"] = legs[i - 1]["to"] if i else origin
-            leg["to"] = legs[i + 1]["from"] if i + 1 < len(legs) else destination
+            leg["to"] = following["from"] if following else destination
             leg["depart"], leg["arrive"] = cursor, cursor + leg.pop("duration")
+            if following:
+                # Rounding up can carry a walk past the departure Google fitted it to.
+                leg["arrive"] = min(leg["arrive"], following["depart"])
         elif leg is not rides[0]:
-            # Walks are rounded up, so one can end a little after the ride leaves.
-            leg["wait"] = max(leg["depart"] - cursor, dt.timedelta())
+            leg["wait"] = leg["depart"] - cursor
         cursor = leg["arrive"]
     depart, end = (legs[0]["depart"], legs[-1]["arrive"]) if legs else (cursor, cursor)
     waits = [_span(dt.timedelta(), leg["wait"]) for leg in legs if "wait" in leg]
+
+    def total(mode_is_walk):
+        return sum(_span(leg["depart"], leg["arrive"]) for leg in legs
+                   if (leg["mode"] == "walk") == mode_is_walk)
+
     option = {
         "depart": _iso(depart),
         "arrive": _iso(end),
         "duration_min": _span(depart, end),
-        "transfers": max(len(rides) - 1, 0),
+        "ride_min": total(False),
         "wait_min": sum(waits),
+        "walk_min": total(True),
+        "transfers": max(len(rides) - 1, 0),
     }
     if waits:
         option["tightest_transfer_min"] = min(waits)

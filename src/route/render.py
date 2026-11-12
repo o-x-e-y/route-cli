@@ -22,10 +22,11 @@ def as_text(result: dict) -> str:
     ]
     for n, option in enumerate(result["options"], 1):
         transfers = option["transfers"]
-        waiting = f", {option['wait_min']} min waiting" if transfers else ""
+        split = (f"{option['ride_min']} ride, {option['wait_min']} wait, "
+                 f"{option['walk_min']} walk")
         lines += ["", f"{n}. {_time(option['depart'], asked)} → {_time(option['arrive'], asked)}  "
-                      f"{option['duration_min']} min, {transfers} "
-                      f"transfer{'' if transfers == 1 else 's'}{waiting}"]
+                      f"{option['duration_min']} min ({split}), {transfers} "
+                      f"transfer{'' if transfers == 1 else 's'}"]
         lines += [f"   {_leg(leg, asked)}" for leg in option["legs"]]
     lines += ["", f"maps: {result['maps_url']}"]
     return "\n".join(lines)

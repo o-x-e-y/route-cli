@@ -24,7 +24,7 @@ def test_text_summary(capsys):
         "to:   Pathé Tilburg Stappegoor (51.539557,5.075946; movie_theater)",
         "depart after Sat 2026-11-14 15:35",
         "",
-        "1. 15:41 → 16:54  73 min, 1 transfer, 9 min waiting",
+        "1. 15:41 → 16:54  73 min (44 ride, 9 wait, 20 walk), 1 transfer",
         "   15:41-15:51  walk 10 min to Eindhoven Centraal",
         "   15:51-16:20  train Sprinter (to Tilburg Universiteit): Eindhoven Centraal → Tilburg",
         "   16:20-16:25  walk 5 min to Tilburg, Centraal Station",
@@ -47,7 +47,7 @@ def test_tight_transfer_is_marked(capsys):
     out = text(capsys, "stappegoor-helmond-arrive",
                ["--from", "Pathé Tilburg Stappegoor", "--to", "Helmond",
                 "--arrive", "2026-11-14 23:30"])
-    assert "2. 22:15 → 23:28  73 min, 2 transfers, 12 min waiting" in out
+    assert "2. 22:15 → 23:28  73 min (42 ride, 12 wait, 19 walk), 2 transfers" in out
     assert ("   23:19-23:28  train Intercity (to Venlo): Eindhoven Centraal → Helmond  "
             "[2 min wait, tight]") in out
 

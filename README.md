@@ -46,8 +46,10 @@ matters rather than scanning many times.
       "depart": "2026-11-14T15:41:00+01:00",
       "arrive": "2026-11-14T16:54:00+01:00",
       "duration_min": 73,
-      "transfers": 1,
+      "ride_min": 44,
       "wait_min": 9,
+      "walk_min": 20,
+      "transfers": 1,
       "tightest_transfer_min": 9,
       "legs": [
         {"mode": "walk", "from": "Pathé Eindhoven", "to": "Eindhoven Centraal",
@@ -87,8 +89,11 @@ matters rather than scanning many times.
   trains (`Intercity`, `Sprinter`) and the line number for buses and trams.
   `headsign` is the direction shown on the vehicle. `operator` can be
   foreign: `De Lijn` is a Belgian bus.
+- `ride_min`, `wait_min` and `walk_min` split the option's `duration_min`:
+  time on board, time waiting between rides, and time on foot. They always
+  add up to `duration_min`.
 - `wait_min` on a ride is the time spent waiting for it after the previous
-  ride and any walk in between. On the option it's the total.
+  ride and any walk in between.
   `tightest_transfer_min` is the shortest of those waits, and is missing
   when there is no transfer. Under 5 minutes, one minute of delay can cost
   the connection.
