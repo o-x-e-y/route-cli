@@ -1,0 +1,1511 @@
+{
+ "routes": [
+  {
+   "legs": [
+    {
+     "startLocation": {
+      "latLng": {
+       "latitude": 51.539556999999995,
+       "longitude": 5.0759457999999995
+      }
+     },
+     "endLocation": {
+      "latLng": {
+       "latitude": 51.475505399999996,
+       "longitude": 5.661981099999999
+      }
+     },
+     "steps": [
+      {
+       "staticDuration": "44s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "142s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "47s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "780s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Tilburg, Centraal Station",
+          "location": {
+           "latLng": {
+            "latitude": 51.560359999999996,
+            "longitude": 5.0800399999999994
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T21:27:00Z",
+         "departureStop": {
+          "name": "Tilburg, Stappegoor/IJsbaan",
+          "location": {
+           "latLng": {
+            "latitude": 51.541336,
+            "longitude": 5.077068
+           }
+          }
+         },
+         "departureTime": "2026-11-14T21:14:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "22:27"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "22:14"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Nrd-Quirijnstok",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Bravo (Arriva)",
+           "phoneNumber": "+31 800 0232545",
+           "uri": "http://www.bravo.info/"
+          }
+         ],
+         "name": "ETZ Elisabeth via CS - Noord-Quirijnstok",
+         "nameShort": "1",
+         "vehicle": {
+          "name": {
+           "text": "Bus"
+          },
+          "type": "BUS",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png"
+         }
+        },
+        "stopCount": 8
+       },
+       "travelMode": "TRANSIT"
+      },
+      {
+       "staticDuration": "224s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "148s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "1320s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Eindhoven Centraal",
+          "location": {
+           "latLng": {
+            "latitude": 51.4428473,
+            "longitude": 5.480482599999999
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T22:17:00Z",
+         "departureStop": {
+          "name": "Tilburg",
+          "location": {
+           "latLng": {
+            "latitude": 51.560752699999995,
+            "longitude": 5.0812485
+           }
+          }
+         },
+         "departureTime": "2026-11-14T21:55:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "23:17"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "22:55"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Eindhoven Centraal",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Nederlandse Spoorwegen",
+           "phoneNumber": "+31 30 751 5155",
+           "uri": "http://www.ns.nl/"
+          }
+         ],
+         "name": "Den Haag Centraal <-> Eindhoven Centraal IC1100",
+         "nameShort": "Intercity",
+         "vehicle": {
+          "name": {
+           "text": "Trein"
+          },
+          "type": "HEAVY_RAIL",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+          "localIconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/nl-ns-train.png"
+         }
+        },
+        "stopCount": 1,
+        "tripShortText": "1183"
+       },
+       "travelMode": "TRANSIT"
+      },
+      {
+       "staticDuration": "0s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "540s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Helmond",
+          "location": {
+           "latLng": {
+            "latitude": 51.475505399999996,
+            "longitude": 5.661981099999999
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T22:28:00Z",
+         "departureStop": {
+          "name": "Eindhoven Centraal",
+          "location": {
+           "latLng": {
+            "latitude": 51.442940899999996,
+            "longitude": 5.4804397
+           }
+          }
+         },
+         "departureTime": "2026-11-14T22:19:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "23:28"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "23:19"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Venlo",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Nederlandse Spoorwegen",
+           "phoneNumber": "+31 30 751 5155",
+           "uri": "http://www.ns.nl/"
+          }
+         ],
+         "name": "Dordrecht <-> Venlo IC3500",
+         "nameShort": "Intercity",
+         "vehicle": {
+          "name": {
+           "text": "Trein"
+          },
+          "type": "HEAVY_RAIL",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+          "localIconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/nl-ns-train.png"
+         }
+        },
+        "stopCount": 1,
+        "tripShortText": "3581"
+       },
+       "travelMode": "TRANSIT"
+      }
+     ]
+    }
+   ],
+   "duration": "4673s"
+  },
+  {
+   "legs": [
+    {
+     "startLocation": {
+      "latLng": {
+       "latitude": 51.539556999999995,
+       "longitude": 5.0759457999999995
+      }
+     },
+     "endLocation": {
+      "latLng": {
+       "latitude": 51.475505399999996,
+       "longitude": 5.661981099999999
+      }
+     },
+     "steps": [
+      {
+       "staticDuration": "41s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "87s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "48s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "400s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "51s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "45s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "78s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "100s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "31s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "660s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Tilburg, Centraal Station",
+          "location": {
+           "latLng": {
+            "latitude": 51.56055,
+            "longitude": 5.0822199999999995
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T21:41:00Z",
+         "departureStop": {
+          "name": "Tilburg Viaduct A58",
+          "location": {
+           "latLng": {
+            "latitude": 51.5386276,
+            "longitude": 5.0633183
+           }
+          }
+         },
+         "departureTime": "2026-11-14T21:30:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "22:41"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "22:30"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Centraal Station",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Bravo (Arriva)",
+           "phoneNumber": "+31 800 0232545",
+           "uri": "http://www.bravo.info/"
+          }
+         ],
+         "name": "Tilburg - Baarle-Nassau",
+         "color": "#0000f2",
+         "nameShort": "137",
+         "textColor": "#ffffff",
+         "vehicle": {
+          "name": {
+           "text": "Bus"
+          },
+          "type": "BUS",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png"
+         }
+        },
+        "stopCount": 4
+       },
+       "travelMode": "TRANSIT"
+      },
+      {
+       "staticDuration": "78s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "148s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "1320s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Eindhoven Centraal",
+          "location": {
+           "latLng": {
+            "latitude": 51.4428473,
+            "longitude": 5.480482599999999
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T22:17:00Z",
+         "departureStop": {
+          "name": "Tilburg",
+          "location": {
+           "latLng": {
+            "latitude": 51.560752699999995,
+            "longitude": 5.0812485
+           }
+          }
+         },
+         "departureTime": "2026-11-14T21:55:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "23:17"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "22:55"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Eindhoven Centraal",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Nederlandse Spoorwegen",
+           "phoneNumber": "+31 30 751 5155",
+           "uri": "http://www.ns.nl/"
+          }
+         ],
+         "name": "Den Haag Centraal <-> Eindhoven Centraal IC1100",
+         "nameShort": "Intercity",
+         "vehicle": {
+          "name": {
+           "text": "Trein"
+          },
+          "type": "HEAVY_RAIL",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+          "localIconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/nl-ns-train.png"
+         }
+        },
+        "stopCount": 1,
+        "tripShortText": "1183"
+       },
+       "travelMode": "TRANSIT"
+      },
+      {
+       "staticDuration": "0s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "540s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Helmond",
+          "location": {
+           "latLng": {
+            "latitude": 51.475505399999996,
+            "longitude": 5.661981099999999
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T22:28:00Z",
+         "departureStop": {
+          "name": "Eindhoven Centraal",
+          "location": {
+           "latLng": {
+            "latitude": 51.442940899999996,
+            "longitude": 5.4804397
+           }
+          }
+         },
+         "departureTime": "2026-11-14T22:19:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "23:28"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "23:19"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Venlo",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Nederlandse Spoorwegen",
+           "phoneNumber": "+31 30 751 5155",
+           "uri": "http://www.ns.nl/"
+          }
+         ],
+         "name": "Dordrecht <-> Venlo IC3500",
+         "nameShort": "Intercity",
+         "vehicle": {
+          "name": {
+           "text": "Trein"
+          },
+          "type": "HEAVY_RAIL",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+          "localIconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/nl-ns-train.png"
+         }
+        },
+        "stopCount": 1,
+        "tripShortText": "3581"
+       },
+       "travelMode": "TRANSIT"
+      }
+     ]
+    }
+   ],
+   "duration": "4388s"
+  },
+  {
+   "legs": [
+    {
+     "startLocation": {
+      "latLng": {
+       "latitude": 51.539556999999995,
+       "longitude": 5.0759457999999995
+      }
+     },
+     "endLocation": {
+      "latLng": {
+       "latitude": 51.475505399999996,
+       "longitude": 5.661981099999999
+      }
+     },
+     "steps": [
+      {
+       "staticDuration": "44s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "122s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "274s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "18s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "134s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "1020s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Tilburg, Centraal Station",
+          "location": {
+           "latLng": {
+            "latitude": 51.56042,
+            "longitude": 5.080769999999999
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T21:37:00Z",
+         "departureStop": {
+          "name": "Tilburg, Eifelweg",
+          "location": {
+           "latLng": {
+            "latitude": 51.54042,
+            "longitude": 5.084166
+           }
+          }
+         },
+         "departureTime": "2026-11-14T21:20:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "22:37"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "22:20"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Reeshof",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Bravo (Arriva)",
+           "phoneNumber": "+31 800 0232545",
+           "uri": "http://www.bravo.info/"
+          }
+         ],
+         "name": "Goirle via CS - Reeshof",
+         "nameShort": "2",
+         "vehicle": {
+          "name": {
+           "text": "Bus"
+          },
+          "type": "BUS",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png"
+         }
+        },
+        "stopCount": 12
+       },
+       "travelMode": "TRANSIT"
+      },
+      {
+       "staticDuration": "174s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "148s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "1320s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Eindhoven Centraal",
+          "location": {
+           "latLng": {
+            "latitude": 51.4428473,
+            "longitude": 5.480482599999999
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T22:17:00Z",
+         "departureStop": {
+          "name": "Tilburg",
+          "location": {
+           "latLng": {
+            "latitude": 51.560752699999995,
+            "longitude": 5.0812485
+           }
+          }
+         },
+         "departureTime": "2026-11-14T21:55:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "23:17"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "22:55"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Eindhoven Centraal",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Nederlandse Spoorwegen",
+           "phoneNumber": "+31 30 751 5155",
+           "uri": "http://www.ns.nl/"
+          }
+         ],
+         "name": "Den Haag Centraal <-> Eindhoven Centraal IC1100",
+         "nameShort": "Intercity",
+         "vehicle": {
+          "name": {
+           "text": "Trein"
+          },
+          "type": "HEAVY_RAIL",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+          "localIconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/nl-ns-train.png"
+         }
+        },
+        "stopCount": 1,
+        "tripShortText": "1183"
+       },
+       "travelMode": "TRANSIT"
+      },
+      {
+       "staticDuration": "0s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "540s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Helmond",
+          "location": {
+           "latLng": {
+            "latitude": 51.475505399999996,
+            "longitude": 5.661981099999999
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T22:28:00Z",
+         "departureStop": {
+          "name": "Eindhoven Centraal",
+          "location": {
+           "latLng": {
+            "latitude": 51.442940899999996,
+            "longitude": 5.4804397
+           }
+          }
+         },
+         "departureTime": "2026-11-14T22:19:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "23:28"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "23:19"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Venlo",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Nederlandse Spoorwegen",
+           "phoneNumber": "+31 30 751 5155",
+           "uri": "http://www.ns.nl/"
+          }
+         ],
+         "name": "Dordrecht <-> Venlo IC3500",
+         "nameShort": "Intercity",
+         "vehicle": {
+          "name": {
+           "text": "Trein"
+          },
+          "type": "HEAVY_RAIL",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+          "localIconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/nl-ns-train.png"
+         }
+        },
+        "stopCount": 1,
+        "tripShortText": "3581"
+       },
+       "travelMode": "TRANSIT"
+      }
+     ]
+    }
+   ],
+   "duration": "4672s"
+  },
+  {
+   "legs": [
+    {
+     "startLocation": {
+      "latLng": {
+       "latitude": 51.539556999999995,
+       "longitude": 5.0759457999999995
+      }
+     },
+     "endLocation": {
+      "latLng": {
+       "latitude": 51.475505399999996,
+       "longitude": 5.661981099999999
+      }
+     },
+     "steps": [
+      {
+       "staticDuration": "44s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "142s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "47s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "780s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Tilburg, Centraal Station",
+          "location": {
+           "latLng": {
+            "latitude": 51.560359999999996,
+            "longitude": 5.0800399999999994
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T21:27:00Z",
+         "departureStop": {
+          "name": "Tilburg, Stappegoor/IJsbaan",
+          "location": {
+           "latLng": {
+            "latitude": 51.541336,
+            "longitude": 5.077068
+           }
+          }
+         },
+         "departureTime": "2026-11-14T21:14:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "22:27"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "22:14"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Nrd-Quirijnstok",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Bravo (Arriva)",
+           "phoneNumber": "+31 800 0232545",
+           "uri": "http://www.bravo.info/"
+          }
+         ],
+         "name": "ETZ Elisabeth via CS - Noord-Quirijnstok",
+         "nameShort": "1",
+         "vehicle": {
+          "name": {
+           "text": "Bus"
+          },
+          "type": "BUS",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png"
+         }
+        },
+        "stopCount": 8
+       },
+       "travelMode": "TRANSIT"
+      },
+      {
+       "staticDuration": "224s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "148s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "1800s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Eindhoven Centraal",
+          "location": {
+           "latLng": {
+            "latitude": 51.4431382,
+            "longitude": 5.480385999999999
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T22:09:00Z",
+         "departureStop": {
+          "name": "Tilburg",
+          "location": {
+           "latLng": {
+            "latitude": 51.560752699999995,
+            "longitude": 5.0812485
+           }
+          }
+         },
+         "departureTime": "2026-11-14T21:39:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "23:09"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "22:39"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Weert",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Nederlandse Spoorwegen",
+           "phoneNumber": "+31 30 751 5155",
+           "uri": "http://www.ns.nl/"
+          }
+         ],
+         "name": "Tilburg Universiteit <-> Weert SPR6400",
+         "nameShort": "Sprinter",
+         "vehicle": {
+          "name": {
+           "text": "Trein"
+          },
+          "type": "HEAVY_RAIL",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+          "localIconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/nl-ns-train.png"
+         }
+        },
+        "stopCount": 5,
+        "tripShortText": "6481"
+       },
+       "travelMode": "TRANSIT"
+      },
+      {
+       "staticDuration": "40s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "102s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "183s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "18s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "117s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "25s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "67s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "540s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Helmond",
+          "location": {
+           "latLng": {
+            "latitude": 51.475505399999996,
+            "longitude": 5.661981099999999
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T22:28:00Z",
+         "departureStop": {
+          "name": "Eindhoven Centraal",
+          "location": {
+           "latLng": {
+            "latitude": 51.442940899999996,
+            "longitude": 5.4804397
+           }
+          }
+         },
+         "departureTime": "2026-11-14T22:19:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "23:28"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "23:19"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Venlo",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Nederlandse Spoorwegen",
+           "phoneNumber": "+31 30 751 5155",
+           "uri": "http://www.ns.nl/"
+          }
+         ],
+         "name": "Dordrecht <-> Venlo IC3500",
+         "nameShort": "Intercity",
+         "vehicle": {
+          "name": {
+           "text": "Trein"
+          },
+          "type": "HEAVY_RAIL",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+          "localIconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/nl-ns-train.png"
+         }
+        },
+        "stopCount": 1,
+        "tripShortText": "3581"
+       },
+       "travelMode": "TRANSIT"
+      }
+     ]
+    }
+   ],
+   "duration": "4673s"
+  },
+  {
+   "legs": [
+    {
+     "startLocation": {
+      "latLng": {
+       "latitude": 51.539556999999995,
+       "longitude": 5.0759457999999995
+      }
+     },
+     "endLocation": {
+      "latLng": {
+       "latitude": 51.475505399999996,
+       "longitude": 5.661981099999999
+      }
+     },
+     "steps": [
+      {
+       "staticDuration": "44s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "142s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "47s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "780s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Tilburg, Centraal Station",
+          "location": {
+           "latLng": {
+            "latitude": 51.560359999999996,
+            "longitude": 5.0800399999999994
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T20:57:00Z",
+         "departureStop": {
+          "name": "Tilburg, Stappegoor/IJsbaan",
+          "location": {
+           "latLng": {
+            "latitude": 51.541336,
+            "longitude": 5.077068
+           }
+          }
+         },
+         "departureTime": "2026-11-14T20:44:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "21:57"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "21:44"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Nrd-Quirijnstok",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Bravo (Arriva)",
+           "phoneNumber": "+31 800 0232545",
+           "uri": "http://www.bravo.info/"
+          }
+         ],
+         "name": "ETZ Elisabeth via CS - Noord-Quirijnstok",
+         "nameShort": "1",
+         "vehicle": {
+          "name": {
+           "text": "Bus"
+          },
+          "type": "BUS",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png"
+         }
+        },
+        "stopCount": 8
+       },
+       "travelMode": "TRANSIT"
+      },
+      {
+       "staticDuration": "224s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "148s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "1320s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Eindhoven Centraal",
+          "location": {
+           "latLng": {
+            "latitude": 51.4428473,
+            "longitude": 5.480482599999999
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T21:47:00Z",
+         "departureStop": {
+          "name": "Tilburg",
+          "location": {
+           "latLng": {
+            "latitude": 51.560752699999995,
+            "longitude": 5.0812485
+           }
+          }
+         },
+         "departureTime": "2026-11-14T21:25:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "22:47"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "22:25"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Eindhoven Centraal",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Nederlandse Spoorwegen",
+           "phoneNumber": "+31 30 751 5155",
+           "uri": "http://www.ns.nl/"
+          }
+         ],
+         "name": "Den Haag Centraal <-> Eindhoven Centraal IC1100",
+         "nameShort": "Intercity",
+         "vehicle": {
+          "name": {
+           "text": "Trein"
+          },
+          "type": "HEAVY_RAIL",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+          "localIconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/nl-ns-train.png"
+         }
+        },
+        "stopCount": 1,
+        "tripShortText": "1181"
+       },
+       "travelMode": "TRANSIT"
+      },
+      {
+       "staticDuration": "0s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "540s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Helmond",
+          "location": {
+           "latLng": {
+            "latitude": 51.475505399999996,
+            "longitude": 5.661981099999999
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T21:58:00Z",
+         "departureStop": {
+          "name": "Eindhoven Centraal",
+          "location": {
+           "latLng": {
+            "latitude": 51.442940899999996,
+            "longitude": 5.4804397
+           }
+          }
+         },
+         "departureTime": "2026-11-14T21:49:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "22:58"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "22:49"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Venlo",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Nederlandse Spoorwegen",
+           "phoneNumber": "+31 30 751 5155",
+           "uri": "http://www.ns.nl/"
+          }
+         ],
+         "name": "Dordrecht <-> Venlo IC3500",
+         "nameShort": "Intercity",
+         "vehicle": {
+          "name": {
+           "text": "Trein"
+          },
+          "type": "HEAVY_RAIL",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+          "localIconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/nl-ns-train.png"
+         }
+        },
+        "stopCount": 1,
+        "tripShortText": "3579"
+       },
+       "travelMode": "TRANSIT"
+      }
+     ]
+    }
+   ],
+   "duration": "4673s"
+  },
+  {
+   "legs": [
+    {
+     "startLocation": {
+      "latLng": {
+       "latitude": 51.539556999999995,
+       "longitude": 5.0759457999999995
+      }
+     },
+     "endLocation": {
+      "latLng": {
+       "latitude": 51.475505399999996,
+       "longitude": 5.661981099999999
+      }
+     },
+     "steps": [
+      {
+       "staticDuration": "41s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "87s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "48s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "353s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "119s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "165s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "72s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "420s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Tilburg Centraal Station perron B",
+          "location": {
+           "latLng": {
+            "latitude": 51.560449999999996,
+            "longitude": 5.0812
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T20:59:00Z",
+         "departureStop": {
+          "name": "Willem II Stadion",
+          "location": {
+           "latLng": {
+            "latitude": 51.5421056,
+            "longitude": 5.0644388
+           }
+          }
+         },
+         "departureTime": "2026-11-14T20:52:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "21:59"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "21:52"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Tilburg Station",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "De Lijn",
+           "phoneNumber": "+32 15 40 88 40",
+           "uri": "https://www.delijn.be/?gtfsversion=20261110_20261231_003000"
+          }
+         ],
+         "name": "Turnhout - Oud-Turnhout - Ravels - Poppel - Tilburg",
+         "uri": "https://www.delijn.be/nl/lijnen/1450/?richtingCode=0",
+         "color": "#ef7d00",
+         "nameShort": "45",
+         "textColor": "#000000",
+         "vehicle": {
+          "name": {
+           "text": "Bus"
+          },
+          "type": "BUS",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png"
+         }
+        },
+        "stopCount": 3,
+        "tripShortText": "696"
+       },
+       "travelMode": "TRANSIT"
+      },
+      {
+       "staticDuration": "146s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "148s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "1320s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Eindhoven Centraal",
+          "location": {
+           "latLng": {
+            "latitude": 51.4428473,
+            "longitude": 5.480482599999999
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T21:47:00Z",
+         "departureStop": {
+          "name": "Tilburg",
+          "location": {
+           "latLng": {
+            "latitude": 51.560752699999995,
+            "longitude": 5.0812485
+           }
+          }
+         },
+         "departureTime": "2026-11-14T21:25:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "22:47"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "22:25"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Eindhoven Centraal",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Nederlandse Spoorwegen",
+           "phoneNumber": "+31 30 751 5155",
+           "uri": "http://www.ns.nl/"
+          }
+         ],
+         "name": "Den Haag Centraal <-> Eindhoven Centraal IC1100",
+         "nameShort": "Intercity",
+         "vehicle": {
+          "name": {
+           "text": "Trein"
+          },
+          "type": "HEAVY_RAIL",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+          "localIconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/nl-ns-train.png"
+         }
+        },
+        "stopCount": 1,
+        "tripShortText": "1181"
+       },
+       "travelMode": "TRANSIT"
+      },
+      {
+       "staticDuration": "0s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "540s",
+       "transitDetails": {
+        "stopDetails": {
+         "arrivalStop": {
+          "name": "Helmond",
+          "location": {
+           "latLng": {
+            "latitude": 51.475505399999996,
+            "longitude": 5.661981099999999
+           }
+          }
+         },
+         "arrivalTime": "2026-11-14T21:58:00Z",
+         "departureStop": {
+          "name": "Eindhoven Centraal",
+          "location": {
+           "latLng": {
+            "latitude": 51.442940899999996,
+            "longitude": 5.4804397
+           }
+          }
+         },
+         "departureTime": "2026-11-14T21:49:00Z"
+        },
+        "localizedValues": {
+         "arrivalTime": {
+          "time": {
+           "text": "22:58"
+          },
+          "timeZone": "Europe/Amsterdam"
+         },
+         "departureTime": {
+          "time": {
+           "text": "22:49"
+          },
+          "timeZone": "Europe/Amsterdam"
+         }
+        },
+        "headsign": "Venlo",
+        "transitLine": {
+         "agencies": [
+          {
+           "name": "Nederlandse Spoorwegen",
+           "phoneNumber": "+31 30 751 5155",
+           "uri": "http://www.ns.nl/"
+          }
+         ],
+         "name": "Dordrecht <-> Venlo IC3500",
+         "nameShort": "Intercity",
+         "vehicle": {
+          "name": {
+           "text": "Trein"
+          },
+          "type": "HEAVY_RAIL",
+          "iconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+          "localIconUri": "//maps.gstatic.com/mapfiles/transit/iw2/6/nl-ns-train.png"
+         }
+        },
+        "stopCount": 1,
+        "tripShortText": "3579"
+       },
+       "travelMode": "TRANSIT"
+      }
+     ]
+    }
+   ],
+   "duration": "4845s"
+  }
+ ],
+ "geocodingResults": {
+  "origin": {
+   "geocoderStatus": {},
+   "type": [
+    "establishment",
+    "movie_theater",
+    "point_of_interest"
+   ],
+   "placeId": "ChIJg2kuiFC-xkcR9d4ABWTtpnk"
+  },
+  "destination": {
+   "geocoderStatus": {},
+   "type": [
+    "locality",
+    "political"
+   ],
+   "placeId": "ChIJIYnWquQjx0cReFJWVYDpFCU"
+  }
+ }
+}

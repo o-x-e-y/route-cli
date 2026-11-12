@@ -22,11 +22,6 @@ def test_bad_time_is_reported(capsys):
     assert capsys.readouterr().err.startswith("route: bad time 'soon'")
 
 
-def test_missing_key_names_the_file(capsys, tmp_path):
-    assert main(["--from", "a", "--to", "b", "--depart", "2026-11-14 15:35"]) == 1
-    err = capsys.readouterr().err
-    assert str(tmp_path / "absent") in err and "ROUTE_GOOGLE_KEY_FILE" in err
-
 
 def test_key_is_read_and_stripped(monkeypatch, tmp_path):
     (tmp_path / "key").write_text("abc123\n")
@@ -43,4 +38,10 @@ def test_empty_key_file(monkeypatch, tmp_path):
 
 def test_default_key_path(monkeypatch):
     monkeypatch.delenv("ROUTE_GOOGLE_KEY_FILE")
-    assert str(config.google_key_file()) == "/run/secrets/google-maps-api-key"
+    assert str(config.google_key_file()) == "/run/secrets/routes-api-key"
+
+
+def test_missing_key_names_the_file(capsys, tmp_path):
+    assert main(["--from", "a", "--to", "b", "--depart", "tomorrow 15:35"]) == 1
+    err = capsys.readouterr().err
+    assert str(tmp_path / "absent") in err and "ROUTE_GOOGLE_KEY_FILE" in err

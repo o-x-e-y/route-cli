@@ -3,7 +3,7 @@ from pathlib import Path
 
 from .errors import RouteError
 
-DEFAULT_GOOGLE_KEY_FILE = "/run/secrets/google-maps-api-key"
+DEFAULT_GOOGLE_KEY_FILE = "/run/secrets/routes-api-key"
 
 
 def google_key_file() -> Path:

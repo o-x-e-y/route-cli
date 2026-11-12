@@ -1,0 +1,18 @@
+{
+ "geocodingResults": {
+  "origin": {
+   "geocoderStatus": {
+    "code": 5,
+    "message": "Address not found."
+   }
+  },
+  "destination": {
+   "geocoderStatus": {},
+   "type": [
+    "locality",
+    "political"
+   ],
+   "placeId": "ChIJIYnWquQjx0cReFJWVYDpFCU"
+  }
+ }
+}

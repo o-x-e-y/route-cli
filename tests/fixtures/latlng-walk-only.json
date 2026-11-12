@@ -1,0 +1,68 @@
+{
+ "routes": [
+  {
+   "legs": [
+    {
+     "startLocation": {
+      "latLng": {
+       "latitude": 51.4794274,
+       "longitude": 5.6570436
+      }
+     },
+     "endLocation": {
+      "latLng": {
+       "latitude": 51.47817690000001,
+       "longitude": 5.6513425999999995
+      }
+     },
+     "steps": [
+      {
+       "staticDuration": "9s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "63s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "82s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "45s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "163s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "21s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "87s",
+       "travelMode": "WALK"
+      },
+      {
+       "staticDuration": "8s",
+       "travelMode": "WALK"
+      }
+     ]
+    }
+   ],
+   "duration": "478s"
+  }
+ ],
+ "geocodingResults": {
+  "destination": {
+   "geocoderStatus": {},
+   "type": [
+    "establishment",
+    "movie_theater",
+    "point_of_interest"
+   ],
+   "placeId": "ChIJPYIZN-Ijx0cRnDlfCa7sC3o"
+  }
+ }
+}

@@ -1,7 +1,9 @@
 import argparse
+import datetime as dt
 import sys
+from collections.abc import Callable
 
-from . import config, places, times
+from . import config, google, maps, render, times, trips
 from .errors import RouteError
 
 EPILOG = f"""\
@@ -15,9 +17,14 @@ examples:
   route --from "Pathé Tilburg Stappegoor" --to Helmond --arrive "2026-11-14 23:30" --json
   route --from 51.4416,5.4697 --to "Tilburg" --depart "tomorrow 09:00"
 
+One Google Routes request per call, billed: don't loop over many times when
+one --depart or --arrive answers the question.
+
 key: the Google Maps Platform key is read from {config.DEFAULT_GOOGLE_KEY_FILE},
 or from the file $ROUTE_GOOGLE_KEY_FILE names.
 """
+
+Fetch = Callable[[dict], dict]
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -33,19 +40,47 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def run(args) -> str:
-    places.waypoint(args.origin)
-    places.waypoint(args.destination)
-    times.parse_moment(args.depart or args.arrive)
-    config.google_key()
-    raise RouteError("routing is not built yet: Google Routes is step 2 of PLAN.md")
+def plan(args, fetch: Fetch, now: dt.datetime) -> dict:
+    arrive = args.arrive is not None
+    moment = times.parse_moment(args.arrive or args.depart, now=now.date())
+    google.check_window(moment, now)
+    response = fetch(google.request_body(args.origin, args.destination, moment, arrive=arrive))
+
+    first = (response.get("routes") or [{}])[0].get("legs") or [{}]
+    origin = trips.resolved(response, "origin", args.origin,
+                            _typed(args.origin) or first[0].get("startLocation"))
+    destination = trips.resolved(response, "destination", args.destination,
+                                 _typed(args.destination) or first[-1].get("endLocation"))
+    found = trips.options(response, args.origin, args.destination, moment, arrive=arrive)
+    if not found:
+        raise RouteError(f"Google found no public transport route from {args.origin!r} "
+                         f"to {args.destination!r} around {times.rfc3339(moment)}")
+    return {
+        "from": origin,
+        "to": destination,
+        "arrive" if arrive else "depart": times.rfc3339(moment),
+        "maps_url": maps.maps_url(args.origin, args.destination,
+                                  origin_place_id=origin.get("place_id"),
+                                  destination_place_id=destination.get("place_id")),
+        "options": found,
+    }
 
 
-def main(argv=None) -> int:
+def _typed(text: str) -> dict | None:
+    point = google.places.latlng(text)
+    return {"latLng": {"latitude": point[0], "longitude": point[1]}} if point else None
+
+
+def _google(body: dict) -> dict:
+    return google.compute_routes(config.google_key(), body)
+
+
+def main(argv=None, fetch: Fetch = _google, now: dt.datetime | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
-        print(run(args))
+        result = plan(args, fetch, now or dt.datetime.now(times.TZ))
     except RouteError as error:
         print(f"route: {error}", file=sys.stderr)
         return 1
+    print(render.as_json(result) if args.json else render.as_text(result))
     return 0
