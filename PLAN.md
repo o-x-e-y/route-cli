@@ -82,8 +82,67 @@ X-Goog-FieldMask: routes.duration,routes.legs.steps.travelMode,routes.legs.steps
 - Free text in `address` should resolve places like "Pathé Tilburg
   Stappegoor" by itself. Check this. If it's unreliable, use a separate
   lookup (Google Places or NS Places, see below).
-- **Not tested yet** (no key so far). Check all of the above against the
-  current docs before coding.
+- **Not tested yet** (no key so far). Checked against the docs on
+  2026-11-12, see below.
+
+### Checked against the docs (2026-11-12, no live request yet)
+
+Confirmed: endpoint, `X-Goog-Api-Key`, required `X-Goog-FieldMask`,
+the three waypoint forms, RFC3339 times with an offset, `languageCode: "nl"`.
+Corrections and additions:
+
+- `departureTime` or `arrivalTime`, never both. `arrivalTime` is ignored,
+  not rejected, outside `TRANSIT`. Transit works from 7 days in the past to
+  100 days in the future. Reject times outside that window locally rather
+  than spending a request.
+- `computeAlternativeRoutes: true` gives the default route plus **up to 3**
+  more, possibly fewer. Transit takes no intermediate waypoints.
+- Transit options go under `transitPreferences`: `routingPreference`
+  (`LESS_WALKING` / `FEWER_TRANSFERS`) and `allowedTravelModes[]` (`BUS`,
+  `SUBWAY`, `TRAIN`, `LIGHT_RAIL`, `RAIL`). A top-level `routingPreference`
+  makes a transit request **fail**. Not needed for v1.
+- **No route- or leg-level departure/arrival times.** The only timestamps
+  are `steps[].transitDetails.stopDetails.departureTime` / `arrivalTime`.
+  Walk steps (`travelMode: "WALK"`) have no times, only `staticDuration`,
+  which may be missing. So: option `depart` = first transit departure minus
+  the walking before it, `arrive` = last transit arrival plus the walking
+  after it. Check against the real response whether that matches the route
+  `duration`.
+- Walking is many small steps, one per instruction.
+  `legs[].stepsOverview.multiModalSegments[]` (`travelMode`,
+  `stepStartIndex`, `stepEndIndex`, `navigationInstruction`) groups steps
+  into segments, which map onto our `legs`. The index base isn't documented:
+  check it.
+- Transit step fields: `transitDetails.stopDetails.{departureStop,arrivalStop}.{name,location.latLng}`,
+  `headsign`, `stopCount`, `tripShortText`,
+  `transitLine.{name,nameShort,vehicle.type,vehicle.name.text,agencies[].name}`.
+- `vehicle.type` values: `RAIL`, `HEAVY_RAIL`, `COMMUTER_TRAIN`,
+  `HIGH_SPEED_TRAIN`, `LONG_DISTANCE_TRAIN`, `BUS`, `INTERCITY_BUS`,
+  `TROLLEYBUS`, `TRAM`, `METRO_RAIL`, `SUBWAY`, `FERRY`, plus some rarer
+  ones and `OTHER`. Which ones NS trains use isn't documented: see the
+  real response.
+- **What `--from` / `--to` resolved to:** there is no name field.
+  `geocodingResults.{origin,destination}.placeId` (address waypoints only)
+  and `legs[].startLocation` / `endLocation` (snapped to a road) are all
+  there is. A readable name needs a separate lookup (NS Places with the
+  existing key, or Google Places, which is billed). Decide in step 2.
+- Fare: `routes.travelAdvisory.transitFare` (Money), only when every transit
+  step has fare data. Nice to have.
+- Errors: the body is `{code, message, details}` (google.rpc). The Routes
+  docs don't state the HTTP status for an exhausted quota. Treat `429` as
+  "quota reached" as planned, and check the real body the first time it
+  happens.
+- Billing: a plain transit request is Compute Routes Essentials (10,000
+  free/month, then $5 per 1,000). Neither `computeAlternativeRoutes` nor the
+  field mask changes the SKU. Billing addresses in the EEA fall under the EEA
+  terms ("functionality varies by region"). Not checked whether that
+  changes anything for transit.
+
+Starting field mask:
+
+```
+routes.duration,routes.legs.startLocation,routes.legs.endLocation,routes.legs.stepsOverview,routes.legs.steps.travelMode,routes.legs.steps.staticDuration,routes.legs.steps.transitDetails,geocodingResults.origin.placeId,geocodingResults.destination.placeId
+```
 
 ### Billing and limits
 
